@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>奇趣传送门</title>
+    <style>
+        :root {
+            --primary-color: #7c3aed;
+            --hover-color: #a78bfa;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .portal-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, var(--primary-color), transparent);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: portal 8s linear infinite;
+        }
+
+        @keyframes portal {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        .btn-explore {
+            padding: 1.5rem 3rem;
+            font-size: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-explore:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124,58,237,0.4);
+        }
+
+        .btn-explore::after {
+            content: "✨";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .btn-explore:hover::after {
+            opacity: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .deco-text {
+            position: fixed;
+            bottom: 2rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-effect"></div>
+    <h1 class="title">点击开启随机奇遇</h1>
+    <button class="btn-explore" onclick="randomJump()">START EXPLORING</button>
+    <p class="deco-text">已收录 {{siteList.length}} 个神秘站点</p>
+
+    <script>
+        const siteList = [
+            "https://poetrystrands.com/",
+            "https://www.emu666.com/",
+            "https://www.icealaskaphotos.com/",
+            "https://calculatingempires.net/"
+            "https://c.tianhezulin.com//"
+        ];
+
+        function randomJump() {
+            const loading = document.createElement('div');
+            loading.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 1.2rem;
+                opacity: 0;
+                animation: fadeIn 0.5s forwards;
+            `;
+            loading.textContent = '正在打开时空通道...';
+            document.body.appendChild(loading);
+
+            setTimeout(() => {
+                const index = Math.floor(Math.random() * siteList.length);
+                window.open(siteList[index], '_blank');
+                loading.remove();
+            }, 1500);
+        }
+
+        // 动态更新站点数量
+        document.querySelector('.deco-text').innerHTML = 
+            `已收录 <strong>${siteList.length}</strong> 个神秘站点`;
+    </script>
+</body>
+</html>
