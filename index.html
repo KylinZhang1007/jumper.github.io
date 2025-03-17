@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>神秘跳转器</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: #FF6B6B;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            transform: scale(1.1);
+            background: #FF5252;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="randomJump()">点击探索未知领域</button>
+
+    <script>
+        // 在此替换您的网站清单（建议不少于20个）
+        const siteList = [
+            "https://thestrokes.com",         // 乐队官网
+            "https://www.radio.garden",       // 全球电台地图
+            "https://zoomquilt.org",          // 无限缩放艺术
+            "https://www.mapcrunch.com",      // 随机街景
+            "https://www.thisissand.com"      // 沙画创作
+        ];
+
+        function randomJump() {
+            const randomIndex = Math.floor(Math.random() * siteList.length);
+            window.open(siteList[randomIndex], '_blank'); 
+        }
+    </script>
+</body>
+</html>
